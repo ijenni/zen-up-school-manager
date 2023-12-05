@@ -28,8 +28,8 @@ public class StudentService {
 
 	public StudentDto add(Long schoolClassId, StudentRequestDto studentRequestDto) {
 
-		SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
-				.orElseThrow(() -> new RuntimeException("TODO"));
+		SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId).orElseThrow(
+				() -> new RuntimeException(String.format("Unable to find school class with id %d", schoolClassId)));
 
 		Student student = mapper.map(studentRequestDto, Student.class);
 		student.setSchoolClass(schoolClass);
@@ -39,8 +39,8 @@ public class StudentService {
 
 	public List<StudentDto> read(Long schoolClassId) {
 
-		SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
-				.orElseThrow(() -> new RuntimeException("TODO"));
+		SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId).orElseThrow(
+				() -> new RuntimeException(String.format("Unable to find school class with id %d", schoolClassId)));
 
 		return studentRepository.findAll( //
 				Example.of( //
